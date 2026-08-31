@@ -1,55 +1,13 @@
 import React from "react";
 import { Pressable, StyleProp, Text, View, ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
 import Animated from "react-native-reanimated";
 import { useTheme, FONTS } from "../theme-context";
 import { usePressScale } from "../lib/hooks";
 import { inr, avatarColor } from "../lib/format";
 
 /* ── GlassCard — your APEX `glass` token rendered with expo-blur ── */
-export function GlassCard({
-  children,
-  style,
-  radius,
-}: {
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
-  radius?: number;
-}) {
-  const t = useTheme();
-  const g = t.glass;
-  const r = radius ?? g.borderRadius;
-  return (
-    <BlurView
-      intensity={Math.min(g.blur, 45)}
-      tint={t.isDark ? "dark" : "light"}
-      style={[
-        {
-          borderRadius: r,
-          overflow: "hidden",
-          backgroundColor: g.background,
-          borderTopWidth: g.borderTopWidth,
-          borderLeftWidth: g.borderLeftWidth,
-          borderRightWidth: g.borderRightWidth,
-          borderBottomWidth: g.borderBottomWidth,
-          borderTopColor: g.borderTopColor,
-          borderLeftColor: g.borderLeftColor,
-          borderRightColor: g.borderRightColor,
-          borderBottomColor: g.borderBottomColor,
-          shadowColor: g.shadowColor,
-          shadowOffset: g.shadowOffset,
-          shadowOpacity: g.shadowOpacity,
-          shadowRadius: g.shadowRadius,
-          elevation: g.elevation,
-        },
-        style,
-      ]}
-    >
-      {children}
-    </BlurView>
-  );
-}
+export { GlassCard } from "./GlassCard";
 
 /* ── mono INR amount with money semantics ── */
 export function AmountText({
