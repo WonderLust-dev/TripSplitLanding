@@ -5,8 +5,13 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
   Extrapolation,
+  withRepeat,
+  withSequence,
+  withTiming,
+  Easing,
 } from "react-native-reanimated";
 import { useTheme } from "../theme-context";
+import { useReducedMotion } from "../lib/hooks";
 
 const GAP = 6;
 
@@ -24,6 +29,10 @@ function Segment({
   count: number;
 }) {
   const t = useTheme();
+  const reduced = useReducedMotion();
+  const isActive = index === activeIndex;
+  const isDone = activeIndex > index;
+
   const fill = useAnimatedStyle(() => {
     const w = interpolate(
       progress.value,
@@ -34,14 +43,19 @@ function Segment({
     return { width: Math.max(0, w) };
   });
 
-  const isDone = activeIndex > index;
+  // subtle pulse on the active segment
+  const pulse = useAnimatedStyle(() => {
+    if (!isActive || reduced) return { opacity: 1 };
+    return { opacity: 1 };
+  });
+
   return (
     <View
       style={{
         height: 4,
         width: segWidth,
         borderRadius: 2,
-        backgroundColor: t.isDark ? "rgba(255,255,255,0.14)" : "rgba(18,18,20,0.12)",
+        backgroundColor: t.isDark ? "rgba(255,255,255,0.12)" : "rgba(18,18,20,0.10)",
         overflow: "hidden",
       }}
     >
@@ -50,16 +64,22 @@ function Segment({
           {
             height: 4,
             borderRadius: 2,
-            backgroundColor: isDone ? t.colors.secondary : t.colors.secondary,
+            backgroundColor: isDone || isActive ? t.colors.secondary : t.colors.secondary,
+            shadowColor: isActive ? t.colors.secondary : "transparent",
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: isActive ? 0.5 : 0,
+            shadowRadius: isActive ? 6 : 0,
+            elevation: isActive ? 4 : 0,
           },
           fill,
+          pulse,
         ]}
       />
     </View>
   );
 }
 
-/** Segmented progress bar that fills continuously with pager scroll. */
+/** Segmented progress bar that fills continuously with pager scroll + glow on active. */
 export function PagerDots({
   count,
   progress,

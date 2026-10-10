@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { useTheme, FONTS } from "../../theme-context";
 import { useCountUp } from "../../lib/hooks";
 import { inr } from "../../lib/format";
-import { GlassCard, Avatar } from "../primitives";
+import { GlassCard, Avatar, Pill } from "../primitives";
 import { IconTrophy } from "../icons";
 
 const STATS = [
@@ -37,11 +37,19 @@ export function MemoryVisual({ width, scale, active }: { width: number; scale: n
 
   return (
     <View style={{ width: cardW }}>
-      <GlassCard radius={22} style={{ padding: 18 }}>
+      <GlassCard radius={22} shimmer style={{ padding: 18 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={{ fontFamily: FONTS.display, fontSize: 17, color: t.colors.textPrimary }}>Your 2026, wrapped</Text>
-          <View style={{ marginLeft: "auto" }}>
+          <View style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: t.colors.secondaryBg, alignItems: "center", justifyContent: "center" }}>
             <IconTrophy size={18} color={t.colors.secondary} />
+          </View>
+          <View style={{ marginLeft: 10 }}>
+            <Text style={{ fontFamily: FONTS.display, fontSize: 17, color: t.colors.textPrimary }}>Your 2026, wrapped</Text>
+            <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 9.5, color: t.colors.textTertiary, marginTop: 1 }}>
+              YEAR IN REVIEW
+            </Text>
+          </View>
+          <View style={{ marginLeft: "auto" }}>
+            <Pill tone="gold">2026</Pill>
           </View>
         </View>
 
@@ -82,19 +90,24 @@ export function MemoryVisual({ width, scale, active }: { width: number; scale: n
               style={{
                 flex: 1,
                 borderWidth: 1,
-                borderColor: t.colors.borderDefault,
+                borderColor: t.colors.secondary,
                 borderRadius: 13,
                 paddingVertical: 10,
                 paddingHorizontal: 6,
                 alignItems: "center",
-                backgroundColor: t.colors.overlayLight,
+                backgroundColor: t.colors.secondaryBg,
+                shadowColor: t.colors.secondary,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.2,
+                shadowRadius: 8,
+                elevation: 4,
               }}
             >
-              <Text style={{ fontSize: 19 }}>{b.emoji}</Text>
-              <Text style={{ fontFamily: FONTS.displayBold, fontSize: 9.5, color: t.colors.textPrimary, marginTop: 5, textAlign: "center" }}>
+              <Text style={{ fontSize: 22 }}>{b.emoji}</Text>
+              <Text style={{ fontFamily: FONTS.displayBold, fontSize: 10, color: t.colors.textPrimary, marginTop: 6, textAlign: "center" }}>
                 {b.name}
               </Text>
-              <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 7.5, color: t.colors.textTertiary, marginTop: 2 }}>
+              <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 8, color: t.colors.secondary, marginTop: 2 }}>
                 {b.sub}
               </Text>
             </View>

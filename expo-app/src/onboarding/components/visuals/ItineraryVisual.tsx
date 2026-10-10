@@ -32,14 +32,21 @@ export function ItineraryVisual({ width, scale, active }: { width: number; scale
 
   return (
     <View style={{ width: cardW }}>
-      <GlassCard radius={22} style={{ padding: 18 }}>
+      <GlassCard radius={22} shimmer style={{ padding: 18 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <IconMap size={17} color={t.colors.secondary} />
-          <Text style={{ fontFamily: FONTS.display, fontSize: 17, color: t.colors.textPrimary, marginLeft: 8 }}>
-            Europe Adventure
-          </Text>
+          <View style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: t.colors.secondaryBg, alignItems: "center", justifyContent: "center" }}>
+            <IconMap size={18} color={t.colors.secondary} />
+          </View>
+          <View style={{ marginLeft: 10 }}>
+            <Text style={{ fontFamily: FONTS.display, fontSize: 17, color: t.colors.textPrimary }}>
+              Europe Adventure
+            </Text>
+            <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 9.5, color: t.colors.textTertiary, marginTop: 1 }}>
+              3 COUNTRIES · 12 DAYS
+            </Text>
+          </View>
           <View style={{ marginLeft: "auto" }}>
-            <Pill>12 DAYS</Pill>
+            <Pill>PLANNED</Pill>
           </View>
         </View>
 

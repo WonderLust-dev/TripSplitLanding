@@ -6,6 +6,7 @@ import { BricolageGrotesque_700Bold, BricolageGrotesque_800ExtraBold } from "@ex
 import { SpaceMono_400Regular, SpaceMono_700Bold } from "@expo-google-fonts/space-mono";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
+import { LinearGradient } from "expo-linear-gradient";
 import Animated, {
   FadeInDown,
   runOnJS,
@@ -114,9 +115,20 @@ function OnboardingFlow({ onFinish, onLogin }: { onFinish?: () => void; onLogin?
           {!isLast && (
             <View style={{ marginLeft: "auto" }}>
               <PressableScale onPress={complete}>
-                <Text style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: 1.4, color: t.colors.textTertiary }}>
-                  SKIP
-                </Text>
+                <View
+                  style={{
+                    paddingHorizontal: 16,
+                    paddingVertical: 10,
+                    borderRadius: t.borderRadius.full,
+                    borderWidth: 1,
+                    borderColor: t.colors.borderDefault,
+                    backgroundColor: t.colors.overlayLight,
+                  }}
+                >
+                  <Text style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: 1.6, color: t.colors.textSecondary }}>
+                    SKIP
+                  </Text>
+                </View>
               </PressableScale>
             </View>
           )}
@@ -147,18 +159,18 @@ function OnboardingFlow({ onFinish, onLogin }: { onFinish?: () => void; onLogin?
         </Animated.ScrollView>
 
         {/* copy */}
-        <View style={{ paddingHorizontal: 28, minHeight: 132 * scale }}>
+        <View style={{ paddingHorizontal: 28, minHeight: 150 * scale }}>
           <Animated.View key={slide.id} entering={entering}>
-            <Text style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: 2.2, color: t.colors.secondary }}>
+            <Text style={{ fontFamily: FONTS.mono, fontSize: 10.5, letterSpacing: 2.4, color: t.colors.secondary, marginBottom: 10 }}>
               {slide.kicker.toUpperCase()}
             </Text>
             <Text
               style={{
                 fontFamily: FONTS.display,
-                fontSize: 27 * scale,
-                lineHeight: 33 * scale,
+                fontSize: 32 * scale,
+                lineHeight: 38 * scale,
                 color: t.colors.textPrimary,
-                marginTop: 8,
+                fontWeight: "800",
               }}
             >
               {slide.title}{"\n"}
@@ -167,10 +179,10 @@ function OnboardingFlow({ onFinish, onLogin }: { onFinish?: () => void; onLogin?
             <Text
               style={{
                 fontFamily: FONTS.body,
-                fontSize: 13.5,
-                lineHeight: 20,
+                fontSize: 14.5,
+                lineHeight: 22,
                 color: t.colors.textSecondary,
-                marginTop: 9,
+                marginTop: 12,
                 maxWidth: contentW,
               }}
             >
@@ -187,32 +199,37 @@ function OnboardingFlow({ onFinish, onLogin }: { onFinish?: () => void; onLogin?
                 <PagerDots count={count} progress={progress} activeIndex={index} />
               </View>
               <PressableScale onPress={goToNext}>
-                <View
+                <LinearGradient
+                  colors={[...t.gradients.gold]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
                   style={{
-                    width: 58,
-                    height: 58,
-                    borderRadius: 29,
-                    backgroundColor: t.colors.secondary,
+                    width: 64,
+                    height: 64,
+                    borderRadius: 32,
                     alignItems: "center",
                     justifyContent: "center",
                     shadowColor: t.colors.secondary,
-                    shadowOffset: { width: 0, height: 8 },
-                    shadowOpacity: 0.45,
-                    shadowRadius: 14,
-                    elevation: 8,
+                    shadowOffset: { width: 0, height: 10 },
+                    shadowOpacity: 0.5,
+                    shadowRadius: 18,
+                    elevation: 10,
                   }}
                 >
-                  <IconArrowRight size={22} color="#121214" strokeWidth={2.4} />
-                </View>
+                  <IconArrowRight size={24} color="#121214" strokeWidth={2.6} />
+                </LinearGradient>
               </PressableScale>
             </View>
           ) : (
-            <Animated.View entering={entering} style={{ gap: 10, maxWidth: contentW, alignSelf: "stretch" }}>
-              <GoldButton label="Create Your First Trip" onPress={openLogin} icon={<IconArrowRight size={17} color="#121214" strokeWidth={2.4} />} />
+            <Animated.View entering={entering} style={{ gap: 12, maxWidth: contentW, alignSelf: "stretch" }}>
+              <GoldButton label="Create Your First Trip" onPress={openLogin} icon={<IconArrowRight size={18} color="#121214" strokeWidth={2.6} />} shimmer />
               <GhostButton label="Log in" onPress={openLogin} />
-              <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 9.5, letterSpacing: 1.2, color: t.colors.textTertiary, textAlign: "center", marginTop: 2 }}>
-                FREE TO GET STARTED · OPENS TRIPSPLIT WEB
-              </Text>
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, marginTop: 4 }}>
+                <View style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: t.colors.success }} />
+                <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 10, letterSpacing: 1.4, color: t.colors.textTertiary }}>
+                  FREE TO GET STARTED · OPENS TRIPSPLIT WEB
+                </Text>
+              </View>
             </Animated.View>
           )}
         </View>

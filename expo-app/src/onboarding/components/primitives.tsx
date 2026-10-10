@@ -205,10 +205,12 @@ export function GoldButton({
   label,
   onPress,
   icon,
+  shimmer = false,
 }: {
   label: string;
   onPress?: () => void;
   icon?: React.ReactNode;
+  shimmer?: boolean;
 }) {
   const t = useTheme();
   return (
@@ -227,13 +229,22 @@ export function GoldButton({
           gap: 10,
           shadowColor: "#B8891F",
           shadowOffset: { width: 0, height: 10 },
-          shadowOpacity: 0.35,
-          shadowRadius: 18,
-          elevation: 8,
+          shadowOpacity: 0.4,
+          shadowRadius: 20,
+          elevation: 10,
+          overflow: "hidden",
         }}
       >
         <Text style={{ fontFamily: FONTS.displayBold, fontSize: 16, color: "#121214" }}>{label}</Text>
         {icon}
+        {shimmer && (
+          <LinearGradient
+            colors={["transparent", "rgba(255,255,255,0.3)", "transparent"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, opacity: 0.5 }}
+          />
+        )}
       </LinearGradient>
     </PressableScale>
   );

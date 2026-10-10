@@ -15,17 +15,35 @@ import { IconWallet, IconArrowRight } from "../icons";
 
 const AnimatedPath = createAnimatedComponent(Path);
 
-function FlowLine({ color }: { color: string }) {
+function FlowLine({ color, width = 40 }: { color: string; width?: number }) {
   const reduced = useReducedMotion();
   const offset = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
-    offset.value = withRepeat(withTiming(-22, { duration: 900, easing: Easing.linear }), -1, false);
+    offset.value = withRepeat(withTiming(-26, { duration: 800, easing: Easing.linear }), -1, false);
   }, [reduced, offset]);
   const props = Animated.useAnimatedProps(() => ({ strokeDashoffset: offset.value }));
   return (
-    <Svg width={34} height={2} viewBox="0 0 34 2" style={{ marginHorizontal: 4 }}>
-      <AnimatedPath d="M0 1 H34" stroke={color} strokeWidth={2} strokeLinecap="round" strokeDasharray="4 7" animatedProps={props} />
+    <Svg width={width} height={4} viewBox={`0 0 ${width} 4`} style={{ marginHorizontal: 6 }}>
+      {/* glow layer */}
+      <AnimatedPath
+        d={`M0 2 H ${width}`}
+        stroke={color}
+        strokeWidth={4}
+        strokeLinecap="round"
+        strokeDasharray="5 8"
+        opacity={0.3}
+        animatedProps={props}
+      />
+      {/* main line */}
+      <AnimatedPath
+        d={`M0 2 H ${width}`}
+        stroke={color}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+        strokeDasharray="5 8"
+        animatedProps={props}
+      />
     </Svg>
   );
 }
@@ -50,11 +68,18 @@ export function SettleVisual({ width, scale, active }: { width: number; scale: n
 
   return (
     <View style={{ width: cardW }}>
-      <GlassCard radius={22} style={{ padding: 18 }}>
+      <GlassCard radius={22} shimmer style={{ padding: 18 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-            <IconWallet size={17} color={t.colors.secondary} />
-            <Text style={{ fontFamily: FONTS.display, fontSize: 17, color: t.colors.textPrimary }}>Final trip balance</Text>
+            <View style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: t.colors.successBg, alignItems: "center", justifyContent: "center" }}>
+              <IconWallet size={18} color={t.colors.success} />
+            </View>
+            <View>
+              <Text style={{ fontFamily: FONTS.display, fontSize: 17, color: t.colors.textPrimary }}>Final trip balance</Text>
+              <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 9.5, color: t.colors.textTertiary, marginTop: 1 }}>
+                ALL EXPENSES SETTLED
+              </Text>
+            </View>
           </View>
           <View style={{ marginLeft: "auto" }}>
             <Stamp>✓ Settled</Stamp>
@@ -92,23 +117,30 @@ export function SettleVisual({ width, scale, active }: { width: number; scale: n
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: t.colors.overlayLight,
+              backgroundColor: t.colors.secondaryBg,
               borderRadius: 14,
               paddingHorizontal: 12,
-              paddingVertical: 9,
-              marginBottom: 7,
+              paddingVertical: 10,
+              marginBottom: 8,
+              borderWidth: 1,
+              borderColor: t.colors.secondary,
+              shadowColor: t.colors.secondary,
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.15,
+              shadowRadius: 6,
+              elevation: 3,
             }}
           >
-            <Avatar name={tr.from} size={24} />
-            <FlowLine color={t.colors.secondary} />
-            <IconArrowRight size={12} color={t.colors.secondary} />
-            <FlowLine color={t.colors.secondary} />
-            <Avatar name={tr.to} size={24} />
-            <Text style={{ fontFamily: FONTS.body, fontSize: 12, color: t.colors.textSecondary, marginLeft: 9 }}>
+            <Avatar name={tr.from} size={26} />
+            <FlowLine color={t.colors.secondary} width={36} />
+            <IconArrowRight size={14} color={t.colors.secondary} strokeWidth={2.5} />
+            <FlowLine color={t.colors.secondary} width={36} />
+            <Avatar name={tr.to} size={26} />
+            <Text style={{ fontFamily: FONTS.body, fontSize: 12.5, color: t.colors.textSecondary, marginLeft: 10, fontWeight: "500" }}>
               {tr.from} pays {tr.to}
             </Text>
             <View style={{ marginLeft: "auto" }}>
-              <AmountText value={tr.amount} size={13.5} color={t.colors.secondary} />
+              <AmountText value={tr.amount} size={14} color={t.colors.secondary} />
             </View>
           </View>
         ))}

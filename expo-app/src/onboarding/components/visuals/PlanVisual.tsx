@@ -27,12 +27,14 @@ function ExpenseChip({ c, scale }: { c: (typeof CHIPS)[number]; scale: number })
   if (c.right !== undefined) pos.right = c.right * scale;
   return (
     <Animated.View style={[{ position: "absolute", transform: [{ rotate: c.rot }] }, float, pos]}>
-      <GlassCard radius={14} style={{ flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: 12, paddingVertical: 9 }}>
-        <Text style={{ fontSize: 16 }}>{c.emoji}</Text>
+      <GlassCard radius={14} shimmer style={{ flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: 12, paddingVertical: 9 }}>
+        <View style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: t.colors.overlayLight, alignItems: "center", justifyContent: "center" }}>
+          <Text style={{ fontSize: 18 }}>{c.emoji}</Text>
+        </View>
         <View>
-          <Text style={{ fontFamily: FONTS.displayBold, fontSize: 11.5, color: t.colors.textPrimary }}>{c.label}</Text>
-          <AmountText value={c.amount} size={11.5} />
-          <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 8.5, color: t.colors.textTertiary, marginTop: 1 }}>
+          <Text style={{ fontFamily: FONTS.displayBold, fontSize: 12, color: t.colors.textPrimary }}>{c.label}</Text>
+          <AmountText value={c.amount} size={12} />
+          <Text style={{ fontFamily: FONTS.monoRegular, fontSize: 9, color: t.colors.textTertiary, marginTop: 1 }}>
             Paid by {c.by}
           </Text>
         </View>
@@ -51,7 +53,7 @@ export function PlanVisual({ width, scale, active }: SlideVisualProps) {
   return (
     <View style={{ width: cardW, alignItems: "center" }}>
       <View style={{ width: cardW * 0.86 }}>
-        <GlassCard radius={22} style={{ padding: 18 }}>
+        <GlassCard radius={22} shimmer style={{ padding: 18 }}>
           {/* header */}
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
             <IconPin size={17} color={t.colors.secondary} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, withDelay, Easing } from "react-native-reanimated";
+import * as Haptics from "expo-haptics";
 import { useTheme, FONTS } from "../../theme-context";
 import { useReducedMotion } from "../../lib/hooks";
 import { inr } from "../../lib/format";
@@ -72,19 +73,24 @@ export function SplitVisual({ width, scale, active }: { width: number; scale: nu
 
   return (
     <View style={{ width: cardW }}>
-      <GlassCard radius={22} style={{ padding: 18 }}>
+      <GlassCard radius={22} shimmer style={{ padding: 18 }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View
             style={{
-              width: 38,
-              height: 38,
+              width: 40,
+              height: 40,
               borderRadius: 12,
               backgroundColor: t.colors.secondaryBg,
               alignItems: "center",
               justifyContent: "center",
+              shadowColor: t.colors.secondary,
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.15,
+              shadowRadius: 4,
+              elevation: 2,
             }}
           >
-            <Text style={{ fontSize: 18 }}>🍜</Text>
+            <Text style={{ fontSize: 20 }}>🍜</Text>
           </View>
           <View style={{ marginLeft: 11 }}>
             <Text style={{ fontFamily: FONTS.display, fontSize: 17, color: t.colors.textPrimary }}>Dinner</Text>
@@ -105,6 +111,8 @@ export function SplitVisual({ width, scale, active }: { width: number; scale: nu
             backgroundColor: t.colors.overlayLight,
             borderRadius: 999,
             padding: 3,
+            borderWidth: 1,
+            borderColor: t.colors.borderLight,
           }}
         >
           {(["Equal split", "Custom"] as const).map((label, i) => {
@@ -112,19 +120,29 @@ export function SplitVisual({ width, scale, active }: { width: number; scale: nu
             return (
               <Pressable
                 key={label}
-                onPress={() => setCustom(i === 1)}
+                onPress={() => {
+                  setCustom(i === 1);
+                  try {
+                    Haptics.selectionAsync();
+                  } catch {}
+                }}
                 style={{
                   flex: 1,
                   paddingVertical: 8,
                   borderRadius: 999,
                   alignItems: "center",
                   backgroundColor: on ? t.colors.secondary : "transparent",
+                  shadowColor: on ? t.colors.secondary : "transparent",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: on ? 0.3 : 0,
+                  shadowRadius: 4,
+                  elevation: on ? 3 : 0,
                 }}
               >
                 <Text
                   style={{
                     fontFamily: FONTS.displayBold,
-                    fontSize: 11.5,
+                    fontSize: 12,
                     color: on ? "#121214" : t.colors.textTertiary,
                   }}
                 >
