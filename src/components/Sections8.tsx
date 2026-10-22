@@ -481,140 +481,178 @@ export function AdminConsole() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   API DIRECTORY — developer / investor confidence
+   DIRECT BOOKING COMMERCE — book villas, guides, experiences
+   directly from verified hosts. No middlemen. No commission markup.
    ═══════════════════════════════════════════════════════════════ */
 
-const API_GROUPS = [
+const BOOKABLE = [
   {
-    group: "Auth",
-    color: "#FF5A36",
-    endpoints: [
-      { method: "POST", path: "/api/v1/auth/login", role: "Public", desc: "Issues signed JWT" },
-      { method: "GET", path: "/api/v1/auth/me", role: "Auth", desc: "Validates Bearer token" },
-    ],
+    emoji: "🏨",
+    name: "Villa Serenidad",
+    location: "Anjuna, Goa",
+    price: 24000,
+    per: "night",
+    rating: 4.8,
+    reviews: 142,
+    capacity: "Up to 8 guests",
+    amenities: ["Pool", "5G Wi-Fi", "Chef", "AC", "Ocean view"],
+    badge: "Early bird −20%",
   },
   {
-    group: "Trips",
-    color: "#FFB350",
-    endpoints: [
-      { method: "GET", path: "/api/v1/trips", role: "Traveler", desc: "List user trips" },
-      { method: "POST", path: "/api/v1/trips", role: "Traveler", desc: "Create trip + invite code" },
-      { method: "GET", path: "/api/v1/trips/[id]", role: "Members", desc: "Trip hub + itinerary" },
-      { method: "PATCH", path: "/api/v1/trips/[id]", role: "Members", desc: "Update itinerary" },
-      { method: "DELETE", path: "/api/v1/trips/[id]", role: "Owner", desc: "Remove trip" },
-    ],
+    emoji: "🏄",
+    name: "Grande Island Scuba",
+    location: "Mormugao, Goa",
+    price: 4200,
+    per: "person",
+    rating: 4.9,
+    reviews: 287,
+    capacity: "Groups of 2–6",
+    amenities: ["PADI certified", "Equipment", "Photos", "Lunch"],
+    badge: "Group of 6+ · ₹500 off",
   },
   {
-    group: "Expenses",
-    color: "#35C98E",
-    endpoints: [
-      { method: "GET", path: "/api/v1/trips/[id]/expenses", role: "Members", desc: "Expenses + breakdown" },
-      { method: "POST", path: "/api/v1/trips/[id]/expenses", role: "Members", desc: "Log receipt item" },
-      { method: "DELETE", path: "/api/v1/expenses/[id]", role: "Payer", desc: "Delete + adjust budget" },
-      { method: "GET", path: "/api/v1/trips/[id]/settlements", role: "Members", desc: "Greedy min-cash-flow" },
-    ],
+    emoji: "🧭",
+    name: "Ravi — Local Guide",
+    location: "Old Goa · Panjim",
+    price: 2800,
+    per: "half-day",
+    rating: 5.0,
+    reviews: 93,
+    capacity: "Up to 10 travelers",
+    amenities: ["Heritage walks", "Portuguese era", "Food stops", "Hindi/English"],
+    badge: "Verified local",
   },
   {
-    group: "Discover",
-    color: "#6AB9E9",
-    endpoints: [
-      { method: "GET", path: "/api/v1/discover", role: "Public", desc: "Catalog with filters" },
-      { method: "GET", path: "/api/v1/discover/[id]", role: "Public", desc: "Property details" },
-      { method: "POST", path: "/api/v1/discover/[id]/reviews", role: "Verified", desc: "Submit review" },
-    ],
-  },
-  {
-    group: "Bookings",
-    color: "#9B7BE8",
-    endpoints: [
-      { method: "GET", path: "/api/v1/bookings", role: "Traveler", desc: "List reservations" },
-      { method: "POST", path: "/api/v1/bookings", role: "Traveler", desc: "Submit inquiry" },
-      { method: "GET", path: "/api/v1/reservations/[id]", role: "Traveler", desc: "Digital smart key" },
-    ],
-  },
-  {
-    group: "Vendor",
-    color: "#E96FA4",
-    endpoints: [
-      { method: "GET", path: "/api/v1/vendor/me", role: "Vendor", desc: "Host profile" },
-      { method: "GET", path: "/api/v1/vendor/businesses", role: "Vendor", desc: "Property portfolio" },
-      { method: "POST", path: "/api/v1/vendor/bookings/[id]/accept", role: "Vendor", desc: "Accept + issue key" },
-      { method: "POST", path: "/api/v1/vendor/bookings/[id]/decline", role: "Vendor", desc: "Decline with reason" },
-      { method: "GET", path: "/api/v1/vendor/businesses/[id]/leads", role: "Vendor", desc: "CRM leads" },
-      { method: "GET", path: "/api/v1/vendor/businesses/[id]/analytics", role: "Vendor", desc: "Funnel analytics" },
-    ],
-  },
-  {
-    group: "Admin",
-    color: "#F2D34E",
-    endpoints: [
-      { method: "GET", path: "/api/v1/admin/overview", role: "ADMIN", desc: "Platform KPIs" },
-      { method: "GET", path: "/api/v1/admin/businesses", role: "ADMIN", desc: "Verification queue" },
-      { method: "POST", path: "/api/v1/admin/businesses/[id]/verify", role: "ADMIN", desc: "Approve / reject" },
-      { method: "GET", path: "/api/v1/admin/demand", role: "ADMIN", desc: "Regional momentum" },
-      { method: "GET", path: "/api/v1/admin/audit-logs", role: "ADMIN", desc: "Compliance trail" },
-    ],
+    emoji: "🍽️",
+    name: "Thalassa Sunset Dinner",
+    location: "Vagator, Goa",
+    price: 3500,
+    per: "person",
+    rating: 4.6,
+    reviews: 412,
+    capacity: "Tables of 4–12",
+    amenities: ["Clifftop", "Seafood", "Live music", "Sunset view"],
+    badge: "Free airport transfer",
   },
 ];
 
-function MethodBadge({ method }: { method: string }) {
-  const colors: Record<string, string> = {
-    GET: "bg-sea/12 text-sea",
-    POST: "bg-sun/12 text-sun",
-    PATCH: "bg-sky2/12 text-sky2",
-    DELETE: "bg-coral/12 text-coral2",
-  };
-  return (
-    <span className={`rounded-md px-2 py-0.5 font-mono text-[9.5px] font-bold tracking-wider ${colors[method] ?? "bg-cream/10 text-cream/60"}`}>
-      {method}
-    </span>
-  );
-}
+const COMPARISON = [
+  { feature: "Booking commission", tripsplit: "0%", others: "15–22%" },
+  { feature: "Host payout", tripsplit: "100%", others: "78–85%" },
+  { feature: "You pay", tripsplit: "Listed price", others: "Listed + GST + convenience fee" },
+  { feature: "Smart key on confirm", tripsplit: "✓ Auto", others: "✗ Call the host" },
+  { feature: "Expense auto-logged", tripsplit: "✓ In your trip", others: "✗ Separate receipt" },
+  { feature: "Group booking", tripsplit: "✓ Per-person packages", others: "✗ One reservation" },
+];
 
-export function ApiDirectory() {
-  const total = API_GROUPS.reduce((s, g) => s + g.endpoints.length, 0);
-
+export function DirectBooking() {
   return (
-    <section id="api" className="relative bg-ink text-cream noise overflow-hidden">
-      <div className="absolute inset-0 dots-dark opacity-60" aria-hidden />
+    <section id="book" className="relative bg-cream text-ink noise overflow-hidden">
+      <div className="absolute inset-0 dots-light opacity-50" aria-hidden />
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-14 items-start">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-14 items-start">
+          {/* left — the pitch */}
           <div className="lg:sticky lg:top-28">
             <SectionHead
-              kicker="REST API"
-              title={[<><CountUp to={total} /> endpoints.</>, <>Fully typed. RBAC-gated.</>]}
-              copy="Every endpoint is live, type-safe, and secured with signed Bearer tokens and role-based access control. Built for travelers, vendors, and platform operators."
+              dark={false}
+              kicker="Direct booking commerce"
+              title={[<>Book the trip.</>, <><span className="underline-stroke">Don't just track it.</span></>]}
+              copy="TripSplit × Wakeru connects you directly with verified villas, local guides, dive schools, beach clubs and experiences. No middlemen. No 15% commission. No hidden convenience fees. The price you see is the price you pay."
             />
+
             <Reveal delay={200}>
-              <div className="mt-8 flex flex-wrap gap-2.5">
-                {["Signed JWT", "RBAC roles", "Rate limiting", "Immutable audit", "Type-safe", "REST + JSON"].map((t) => (
-                  <span key={t} className="rounded-full border border-cream/15 bg-cream/5 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-wider text-cream/65">{t}</span>
+              <div className="mt-8 rounded-[1.3rem] bg-ink text-cream p-6 shadow-card">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-coral2">You save vs. Ixigo / MakeMyTrip / Airbnb</p>
+                <div className="mt-4 space-y-0">
+                  {COMPARISON.map((row, i) => (
+                    <div key={row.feature} className={`grid grid-cols-3 gap-3 py-3 ${i < COMPARISON.length - 1 ? "border-b border-cream/8" : ""}`}>
+                      <span className="text-[0.85rem] text-cream/70">{row.feature}</span>
+                      <span className="text-[0.88rem] font-bold text-sea">{row.tripsplit}</span>
+                      <span className="text-[0.85rem] text-cream/45 line-through decoration-coral/60 decoration-1">{row.others}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 flex items-center gap-2 rounded-lg bg-sea/10 border border-sea/25 px-3 py-2.5">
+                  <IconCheck size={14} className="text-sea" />
+                  <p className="text-[0.82rem] text-sea">
+                    Average group of 6 saves <strong>₹8,400</strong> on a 4-night Goa trip.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={320}>
+              <div className="mt-6 flex flex-wrap gap-2.5">
+                {["🏨 Villas & stays", "🧭 Local guides", "🏄 Adventures", "🍽️ Dining", "🧘 Wellness", "🍹 Nightlife"].map((c) => (
+                  <span key={c} className="rounded-full bg-paper border border-ink/10 px-3.5 py-1.5 font-semibold text-[0.82rem] text-ink/75">{c}</span>
                 ))}
               </div>
             </Reveal>
           </div>
 
+          {/* right — bookable listings */}
           <div className="space-y-4">
-            {API_GROUPS.map((g, gi) => (
-              <Reveal key={g.group} delay={gi * 80}>
-                <div className="rounded-[1.2rem] border border-cream/10 bg-ink2/80 overflow-hidden">
-                  <div className="flex items-center gap-3 px-5 py-3.5 border-b border-cream/8" style={{ borderLeftColor: g.color, borderLeftWidth: 3 }}>
-                    <span className="font-display font-bold text-[0.95rem] text-paper">{g.group}</span>
-                    <span className="font-mono text-[10px] text-cream/40">{g.endpoints.length} endpoints</span>
+            {BOOKABLE.map((v, i) => (
+              <Reveal key={v.name} delay={i * 100}>
+                <article className="group rounded-[1.3rem] bg-paper border border-ink/10 p-5 shadow-lift transition-all duration-300 hover:-translate-y-1 hover:border-coral/40 hover:shadow-card">
+                  <div className="flex items-start gap-4">
+                    <span className="grid place-items-center h-14 w-14 rounded-xl bg-cream text-[1.8rem] shrink-0">{v.emoji}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <h3 className="font-display font-bold text-[1.1rem] leading-tight">{v.name}</h3>
+                          <p className="font-mono text-[10.5px] text-ink/50 mt-0.5 flex items-center gap-1.5">
+                            <IconPin size={11} className="text-coral" /> {v.location}
+                          </p>
+                        </div>
+                        <span className="shrink-0 rounded-full bg-coral/10 text-coral px-2.5 py-1 font-mono text-[9.5px] uppercase tracking-wider font-semibold whitespace-nowrap">
+                          {v.badge}
+                        </span>
+                      </div>
+
+                      <div className="mt-3 flex items-center gap-3 flex-wrap">
+                        <span className="flex items-center gap-1 text-[0.85rem] font-semibold">
+                          <span className="text-amber-500">⭐</span> {v.rating}
+                          <span className="font-mono text-[10.5px] text-ink/45">({v.reviews})</span>
+                        </span>
+                        <span className="font-mono text-[10.5px] text-ink/45">· {v.capacity}</span>
+                      </div>
+
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {v.amenities.map((a) => (
+                          <span key={a} className="rounded-full bg-cream2 px-2.5 py-0.5 font-mono text-[9.5px] text-ink/60">{a}</span>
+                        ))}
+                      </div>
+
+                      <div className="mt-4 flex items-end justify-between gap-3">
+                        <div>
+                          <p className="font-display font-bold text-[1.35rem] tabular-nums">
+                            ₹{v.price.toLocaleString()}
+                          </p>
+                          <p className="font-mono text-[10px] text-ink/45">per {v.per} · no hidden fees</p>
+                        </div>
+                        <button className="rounded-full bg-ink text-cream px-5 py-2.5 font-bold text-[0.82rem] hover:bg-coral transition-colors duration-300 flex items-center gap-1.5 group-hover:bg-coral">
+                          Book now <IconArrow size={13} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <ul className="divide-y divide-cream/5">
-                    {g.endpoints.map((e) => (
-                      <li key={e.path + e.method} className="flex items-center gap-3 px-5 py-2.5 hover:bg-cream/4 transition-colors">
-                        <MethodBadge method={e.method} />
-                        <code className="flex-1 font-mono text-[11.5px] text-cream/75 truncate">{e.path}</code>
-                        <span className="hidden sm:block font-mono text-[9.5px] text-cream/35 uppercase tracking-wider w-16 text-right">{e.role}</span>
-                        <span className="hidden md:block text-[0.78rem] text-cream/50 w-36 text-right truncate">{e.desc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                </article>
               </Reveal>
             ))}
+
+            <Reveal delay={450}>
+              <div className="rounded-[1.3rem] bg-ink text-cream p-5 shadow-card flex items-center gap-4">
+                <span className="grid place-items-center h-12 w-12 rounded-xl bg-sea/15 text-sea shrink-0">
+                  <IconShield size={20} />
+                </span>
+                <div className="flex-1">
+                  <p className="font-display font-bold text-[0.98rem] text-paper">Every host is verified.</p>
+                  <p className="text-[0.82rem] text-cream/60 mt-0.5">GSTIN, business license, and property address reviewed by our team. Only verified partners can list.</p>
+                </div>
+                <span className="stamp text-sea text-[9px] px-2.5 py-1.5 uppercase shrink-0">Verified ✓</span>
+              </div>
+            </Reveal>
           </div>
         </div>
       </div>

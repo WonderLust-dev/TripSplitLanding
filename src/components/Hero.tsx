@@ -81,7 +81,7 @@ const DESTS: Dest[] = [
   },
 ];
 
-const PILLS = ["Plan", "Track", "Split", "Settle", "Discover", "Remember"];
+const PILLS = ["Plan", "Book", "Track", "Split", "Settle", "Discover", "Remember"];
 const TICKER = ["GOA", "LISBON", "KYOTO", "UBUD", "SANTORINI", "MARRAKECH", "PATAGONIA", "REYKJAVÍK", "TOKYO", "THE ALPS", "ZANZIBAR", "SAIGON"];
 
 export default function Hero() {

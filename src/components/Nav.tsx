@@ -4,9 +4,9 @@ import { Logo, IconMenu, IconCross, IconArrow, IconInstagram, IconXSocial, IconL
 const LINKS = [
   { label: "Features", href: "#features" },
   { label: "Discover", href: "#discover" },
+  { label: "Book", href: "#book" },
   { label: "For Hosts", href: "#vendor" },
   { label: "Insights", href: "#insights" },
-  { label: "API", href: "#api" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];

@@ -99,7 +99,7 @@ const FEATURES: { icon: React.ReactNode; title: string; copy: string }[] = [
   { icon: <IconTicket size={19} />, title: "Vendor Commerce", copy: "Host portal with GPS capture, smart keys, CRM and flash offers." },
   { icon: <IconLock size={19} />, title: "IoT Smart Key", copy: "Keyless check-in with 6-digit PIN, Wi-Fi and validity windows." },
   { icon: <IconShield size={19} />, title: "Admin Console", copy: "KPIs, verification queue, demand velocity and audit logs." },
-  { icon: <IconLink size={19} />, title: "REST API", copy: "33 typed endpoints with signed JWT auth and RBAC." },
+  { icon: <IconPin size={19} />, title: "Direct Booking", copy: "Book villas, guides, and experiences directly from verified hosts. No middlemen." },
 ];
 
 export function FeatureGrid() {
@@ -229,7 +229,8 @@ const FAQS = [
   { q: "Can vendors and hosts list their properties?", a: "Yes. Wakeru Local equips boutique villas, beach clubs, dive schools and dining lounges with GPS capture, smart keys, CRM leads, flash offers, verified reviews, and a 5-stage conversion funnel." },
   { q: "What is the IoT smart key?", a: "Every confirmed booking auto-generates a digital pass — a 6-digit PIN for the physical lock, Wi-Fi credentials, and a validity window that expires on checkout. No keys to lose, no queues to stand in." },
   { q: "Is there an admin console for platform operators?", a: "Yes. One console shows platform KPIs, partner verification queue, regional demand velocity intelligence, and immutable audit logs — everything trust & safety and investors need." },
-  { q: "Does TripSplit have a REST API?", a: "Yes. 33 fully typed endpoints secured with signed Bearer tokens and role-based access control — built for travelers, vendors, and platform operators." },
+  { q: "Can I book villas, guides, and experiences directly on TripSplit?", a: "Yes. TripSplit × Wakeru connects you directly with verified hosts — boutique villas, local guides, dive schools, beach clubs, and experiences. No middlemen, no 15% commission markup. The price you see is the price you pay." },
+  { q: "How does TripSplit compare to Ixigo or MakeMyTrip?", a: "Unlike OTAs that charge 15–22% commission, TripSplit connects you directly with verified hosts. You pay the listed price with no hidden convenience fees. An average group of 6 saves around ₹8,400 on a 4-night Goa trip." },
 ];
 
 export function Faq() {
@@ -325,7 +326,7 @@ const FOOT = [
   },
   {
     h: "Platform",
-    links: [["Admin Console", "#admin"], ["REST API", "#api"], ["Security", "#security"], ["How It Works", "#how"]],
+    links: [["Admin Console", "#admin"], ["Direct Booking", "#book"], ["Security", "#security"], ["How It Works", "#how"]],
   },
   {
     h: "Company",
