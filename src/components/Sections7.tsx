@@ -3,7 +3,8 @@ import { SectionHead, Reveal, MaskLines, Avatar, BtnLink, inr } from "../lib/ui"
 import {
   IconArrow, IconCheck, IconRoute, IconReceipt, IconSplit, IconWallet, IconChart, IconUsers,
   IconCamera, IconMap, IconCompass, IconBell, IconTrophy, IconMedal, IconPin, IconSpark,
-  IconInstagram, IconXSocial, IconLinkedIn, Logo, IconPlane,
+  IconInstagram, IconXSocial, IconLinkedIn, Logo, IconPlane, IconCalendar, IconLink, IconEye,
+  IconTicket, IconLock, IconShield,
 } from "../lib/icons";
 import { IMG } from "../lib/images";
 
@@ -76,13 +77,18 @@ export function Testimonials() {
 /* ================= FEATURE GRID ================= */
 const FEATURES: { icon: React.ReactNode; title: string; copy: string }[] = [
   { icon: <IconRoute size={19} />, title: "Trip Planning", copy: "Plan destinations, stops, itineraries and travel details." },
+  { icon: <IconCalendar size={19} />, title: "Day-by-Day Schedule", copy: "Organize each day into morning, afternoon, sunset and stay segments." },
+  { icon: <IconCheck size={19} />, title: "Packing Checklist", copy: "Group packing list with real-time progress tracking." },
   { icon: <IconReceipt size={19} />, title: "Expense Tracking", copy: "Track every expense across the journey." },
-  { icon: <IconSplit size={19} />, title: "Smart Splitting", copy: "Split expenses fairly between travelers." },
-  { icon: <IconCheck size={19} />, title: "Settlements", copy: "Simplify who owes whom." },
-  { icon: <IconWallet size={19} />, title: "Budgets", copy: "Set and monitor trip spending." },
-  { icon: <IconChart size={19} />, title: "Finance", copy: "Track transactions, bills, debts and goals." },
+  { icon: <IconCamera size={19} />, title: "AI Receipt OCR", copy: "4-stage scanner parses dishes, prices, tax and tips automatically." },
+  { icon: <IconSplit size={19} />, title: "Smart Splitting", copy: "Equal, custom, or line-item assignment with proportional tax." },
+  { icon: <IconCheck size={19} />, title: "Settlements", copy: "Greedy min-cash-flow algorithm simplifies who owes whom." },
+  { icon: <IconLink size={19} />, title: "WhatsApp Ledger", copy: "1-click formatted settlement share via WhatsApp." },
+  { icon: <IconWallet size={19} />, title: "Multi-Currency", copy: "Live conversion across INR, USD, EUR, GBP, JPY, AED and THB." },
+  { icon: <IconChart size={19} />, title: "Budget Health", copy: "Real-time gauge of spend vs. budget with category breakdown." },
+  { icon: <IconCompass size={19} />, title: "Discover Directory", copy: "Fuzzy search across verified stays, dining and adventures." },
+  { icon: <IconEye size={19} />, title: "Comparison Matrix", copy: "Compare up to 4 venues side-by-side on price, rating and amenities." },
   { icon: <IconUsers size={19} />, title: "Friends", copy: "Travel and collaborate with your crew." },
-  { icon: <IconCamera size={19} />, title: "Receipts", copy: "Keep receipts connected to expenses." },
   { icon: <IconMap size={19} />, title: "Maps", copy: "Visualize your journey and destinations." },
   { icon: <IconCompass size={19} />, title: "Insights", copy: "Understand your travel and spending patterns." },
   { icon: <IconBell size={19} />, title: "Reminders", copy: "Never forget a payment." },
@@ -90,6 +96,10 @@ const FEATURES: { icon: React.ReactNode; title: string; copy: string }[] = [
   { icon: <IconMedal size={19} />, title: "Leaderboards", copy: "Compete with your travel crew." },
   { icon: <IconPin size={19} />, title: "Trip Stories", copy: "Turn completed trips into memories." },
   { icon: <IconSpark size={19} />, title: "Year in Review", copy: "See your entire travel year." },
+  { icon: <IconTicket size={19} />, title: "Vendor Commerce", copy: "Host portal with GPS capture, smart keys, CRM and flash offers." },
+  { icon: <IconLock size={19} />, title: "IoT Smart Key", copy: "Keyless check-in with 6-digit PIN, Wi-Fi and validity windows." },
+  { icon: <IconShield size={19} />, title: "Admin Console", copy: "KPIs, verification queue, demand velocity and audit logs." },
+  { icon: <IconPin size={19} />, title: "Direct Booking", copy: "Book villas, guides, and experiences directly from verified hosts. No middlemen." },
 ];
 
 export function FeatureGrid() {
@@ -204,14 +214,23 @@ const FAQS = [
   { q: "Can I plan my entire trip in TripSplit?", a: "Yes — destinations, stops, dates, travel segments, bookings and budget live on one itinerary timeline that your whole crew can see and edit." },
   { q: "Can multiple people add expenses?", a: "Absolutely. Everyone in the trip can add expenses in real time. Each one is timestamped, categorized and attributed to the person who paid." },
   { q: "Can expenses be split differently?", a: "Yes. Split equally, by custom amounts, or by weighted shares — TripSplit recalculates everyone's share instantly and always balances to the exact rupee." },
-  { q: "How does TripSplit calculate settlements?", a: "It works out each person's net balance across all expenses, then simplifies the group into the fewest possible payments — so three transfers can replace six." },
+  { q: "How does TripSplit calculate settlements?", a: "It uses a greedy min-cash-flow algorithm that works out each person's net balance, then simplifies the group into the fewest possible payments — so three transfers can replace six." },
   { q: "Can I track a trip budget?", a: "Yes. Set a budget, watch spend against it in real time, and see burn-per-day, category breakdowns and what's left." },
   { q: "Can I invite friends?", a: "Yes — share an invite link, manage your crew, and keep a history of shared trips and activity with each friend." },
-  { q: "Can I track receipts?", a: "Yes. Attach receipt photos to expenses, or scan them and let TripSplit fill in the amount, category, payer and date automatically." },
+  { q: "Can I track receipts?", a: "Yes. Attach receipt photos to expenses, or use the AI OCR scanner that reads the bill in 4 stages — contrast, OCR, dish parsing, and tax verification — then assigns each line item to specific travelers." },
   { q: "Does TripSplit work for couples and families?", a: "Very well. It works for any group size from two upwards — honeymoons, family reunions, festivals, road trips." },
   { q: "Can I see my travel history?", a: "Yes. Completed trips become stories with stats, stops and memories, and everything feeds your personal travel history." },
   { q: "What are TripSplit achievements?", a: "Milestones you earn by traveling — trips completed, destinations visited, budgets honored, streaks kept. Fun, lightly competitive, never naggy." },
   { q: "Can I see my year in review?", a: "Yes. At year-end TripSplit wraps your trips, cities, friends, spending and achievements into a personal travel recap." },
+  { q: "Does TripSplit support multiple currencies?", a: "Yes. Live conversion between INR, USD, EUR, GBP, JPY, AED and THB — with a budget health gauge that tracks spend against your group's total in real time." },
+  { q: "Can I share the settlement on WhatsApp?", a: "Yes. One tap generates a beautifully formatted settlement summary, copies it to your clipboard, and opens WhatsApp with the message pre-filled — ready to send to the group." },
+  { q: "Is there a day-by-day itinerary planner?", a: "Yes. Organize each day into 4 segments — morning, afternoon, sunset and stay — with a group packing checklist that tracks progress in real time." },
+  { q: "Can I discover and compare venues?", a: "Yes. The Discover Directory lets you search verified stays, dining and adventures, then compare up to 4 venues side-by-side on price, capacity, ratings and amenities." },
+  { q: "Can vendors and hosts list their properties?", a: "Yes. Wakeru Local equips boutique villas, beach clubs, dive schools and dining lounges with GPS capture, smart keys, CRM leads, flash offers, verified reviews, and a 5-stage conversion funnel." },
+  { q: "What is the IoT smart key?", a: "Every confirmed booking auto-generates a digital pass — a 6-digit PIN for the physical lock, Wi-Fi credentials, and a validity window that expires on checkout. No keys to lose, no queues to stand in." },
+  { q: "Is there an admin console for platform operators?", a: "Yes. One console shows platform KPIs, partner verification queue, regional demand velocity intelligence, and immutable audit logs — everything trust & safety and investors need." },
+  { q: "Can I book villas, guides, and experiences directly on TripSplit?", a: "Yes. TripSplit × Wakeru connects you directly with verified hosts — boutique villas, local guides, dive schools, beach clubs, and experiences. No middlemen, no 15% commission markup. The price you see is the price you pay." },
+  { q: "How does TripSplit compare to Ixigo or MakeMyTrip?", a: "Unlike OTAs that charge 15–22% commission, TripSplit connects you directly with verified hosts. You pay the listed price with no hidden convenience fees. An average group of 6 saves around ₹8,400 on a 4-night Goa trip." },
 ];
 
 export function Faq() {
@@ -299,19 +318,19 @@ export function FinalCta() {
 const FOOT = [
   {
     h: "Product",
-    links: [["Features", "#features"], ["Trip Planner", "#planner"], ["Expense Splitting", "#split"], ["Settlements", "#settle"], ["Insights", "#insights"], ["Achievements", "#achievements"]],
+    links: [["Features", "#features"], ["Trip Planner", "#planner"], ["Expense Splitting", "#split"], ["Settlements", "#settle"], ["Discover", "#discover"], ["AI Receipt OCR", "#ai-receipt"], ["Insights", "#insights"], ["Achievements", "#achievements"]],
+  },
+  {
+    h: "For Hosts",
+    links: [["Vendor Commerce", "#vendor"], ["IoT Smart Key", "#smartkey"], ["Flash Offers", "#vendor"], ["CRM Leads", "#vendor"], ["Analytics", "#vendor"]],
+  },
+  {
+    h: "Platform",
+    links: [["Admin Console", "#admin"], ["Direct Booking", "#book"], ["Security", "#security"], ["How It Works", "#how"]],
   },
   {
     h: "Company",
-    links: [["About", "#top"], ["Contact", "mailto:hello@tripsplit.app"], ["Careers", "mailto:careers@tripsplit.app"]],
-  },
-  {
-    h: "Resources",
-    links: [["Help Center", "#faq"], ["FAQ", "#faq"], ["Guides", "#stories"]],
-  },
-  {
-    h: "Legal",
-    links: [["Privacy", "#security"], ["Terms", "#security"], ["Security", "#security"]],
+    links: [["About", "#top"], ["Contact", "mailto:hello@tripsplit.app"], ["Careers", "mailto:careers@tripsplit.app"], ["Help Center", "#faq"], ["Privacy", "#security"], ["Terms", "#security"]],
   },
 ];
 
@@ -345,7 +364,7 @@ export function Footer() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {FOOT.map((col) => (
               <nav key={col.h} aria-label={col.h}>
                 <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cream/45">{col.h}</p>
@@ -364,7 +383,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-14 pt-7 border-t border-cream/8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-mono text-[11px] text-cream/45">© 2026 TripSplit. Made for better trips.</p>
+          <p className="font-mono text-[11px] text-cream/45">© 2026 TripSplit × Wakeru. Made for better trips.</p>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cream/35 flex items-center gap-2">
             GOA <IconPlane size={12} className="text-coral2/60" /> BALI <IconPlane size={12} className="text-coral2/60" /> NEXT?
           </p>

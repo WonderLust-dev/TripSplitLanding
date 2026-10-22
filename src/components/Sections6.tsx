@@ -309,6 +309,9 @@ export function Security() {
                 <span className="inline-flex items-center gap-2 rounded-full border border-cream/15 bg-cream/5 px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-cream/70">
                   <IconShield size={14} className="text-sea" /> No ads, no data selling
                 </span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-cream/15 bg-cream/5 px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-cream/70">
+                  <IconLock size={14} className="text-sea" /> 33 secured endpoints
+                </span>
               </div>
             </Reveal>
           </div>

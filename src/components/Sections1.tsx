@@ -1,5 +1,5 @@
 import { SectionHead, Reveal, MaskLines, Avatar, useInView, inr } from "../lib/ui";
-import { IconSplit, IconRoute, IconWallet, IconUsers, IconChart, IconTrophy, IconBell } from "../lib/icons";
+import { IconSplit, IconRoute, IconWallet, IconUsers, IconChart, IconTrophy, IconBell, IconCompass, IconCamera } from "../lib/icons";
 
 /* ================= PROBLEM ================= */
 const MESSAGES = [
@@ -213,6 +213,58 @@ function MemoriesPreview() {
   );
 }
 
+function DiscoverPreview() {
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      {[
+        { emoji: "🏨", name: "Villa Serenidad", price: "₹24K" },
+        { emoji: "🍽️", name: "Thalassa", price: "₹3.5K" },
+        { emoji: "🏄", name: "Scuba Shack", price: "₹4.2K" },
+        { emoji: "🍹", name: "Curlies", price: "₹2.8K" },
+      ].map((v) => (
+        <div key={v.name} className="rounded-lg bg-ink border border-cream/10 px-2.5 py-2">
+          <span className="text-sm">{v.emoji}</span>
+          <p className="font-semibold text-[0.72rem] text-paper mt-0.5 truncate">{v.name}</p>
+          <p className="font-mono text-[0.65rem] text-sun">{v.price}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function OCRPreview() {
+  const { ref, on } = useInView<HTMLDivElement>(0.4);
+  return (
+    <div ref={ref} className="space-y-2">
+      <div className="flex items-center gap-2">
+        <span className="text-sm">🔍</span>
+        <div className="flex-1 h-1.5 rounded-full bg-ink overflow-hidden">
+          <div className="h-full rounded-full bg-sea transition-all duration-700" style={{ width: on ? "100%" : "0%" }} />
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-sm">📝</span>
+        <div className="flex-1 h-1.5 rounded-full bg-ink overflow-hidden">
+          <div className="h-full rounded-full bg-sun transition-all duration-700 delay-200" style={{ width: on ? "100%" : "0%" }} />
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-sm">🍽️</span>
+        <div className="flex-1 h-1.5 rounded-full bg-ink overflow-hidden">
+          <div className="h-full rounded-full bg-coral transition-all duration-700 delay-400" style={{ width: on ? "100%" : "0%" }} />
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-sm">✓</span>
+        <div className="flex-1 h-1.5 rounded-full bg-ink overflow-hidden">
+          <div className="h-full rounded-full bg-sky2 transition-all duration-700 delay-600" style={{ width: on ? "100%" : "0%" }} />
+        </div>
+      </div>
+      <p className="font-mono text-[0.65rem] text-cream/40 mt-1">4-stage OCR · line-item assignment</p>
+    </div>
+  );
+}
+
 const MODULES: {
   icon: React.ReactNode;
   title: string;
@@ -226,6 +278,8 @@ const MODULES: {
   { icon: <IconUsers size={20} />, title: "Friends", copy: "Invite friends, manage groups, and travel together — not in separate chats.", preview: <FriendsPreview />, span: "lg:col-span-2" },
   { icon: <IconChart size={20} />, title: "Insights", copy: "See where your money went and how your trip really performed.", preview: <InsightsPreview />, span: "lg:col-span-2" },
   { icon: <IconTrophy size={20} />, title: "Memories", copy: "Turn every trip into achievements, stories and a year-in-review you'll actually revisit.", preview: <MemoriesPreview />, span: "lg:col-span-6" },
+  { icon: <IconCompass size={20} />, title: "Discover", copy: "Search verified stays, dining and adventures — compare up to 4 venues side-by-side.", preview: <DiscoverPreview />, span: "lg:col-span-3" },
+  { icon: <IconCamera size={20} />, title: "AI OCR", copy: "Snap the bill — 4-stage scanner parses dishes, prices, tax and tips automatically.", preview: <OCRPreview />, span: "lg:col-span-3" },
 ];
 
 export function ValueModules() {
